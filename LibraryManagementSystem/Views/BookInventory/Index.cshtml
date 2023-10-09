@@ -1,4 +1,6 @@
-﻿@model IEnumerable<LibraryManagementSystem.Models.Book>
+﻿
+
+@model IEnumerable<LibraryManagementSystem.Models.Book>
 
 @{
     ViewData["Title"] = "Index";
@@ -53,9 +55,17 @@
                     @Html.DisplayFor(modelItem => item.Author.AuthorName)
                 </td>
                 <td>
-                    <a asp-action="Borrow" asp-route-id="@item.BookID">Borrow</a> 
-                   
+                    @if(item.AvailableCopies==0)
+                    {
+                        <a asp-action="Borrow" asp-route-id="@item.BookID"  class="nav-link disabled" aria-disabled="true">Borrow</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Borrow" asp-route-id="@item.BookID">Borrow</a>
+                    }
                     
+
+
             </tr>
         }
     </tbody>

@@ -1,6 +1,8 @@
 ﻿using LibraryManagementSystem.Data;
+using LibraryManagementSystem.Data.Migrations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -18,20 +20,38 @@ namespace LibraryManagementSystem.Controllers
             var applicationDbContext = _context.Books.Include(b => b.Author);
             return View(await applicationDbContext.ToListAsync());
         }
+        [HttpGet]
          public async Task<IActionResult> Borrow(int id)
         {
-            var book= _context.Books.FirstOrDefaultAsync(m=>m.BookID==id);
+       
+            var book = await _context.Books.FindAsync(id);
             
-            
+            if (book == null)
+            {
+                return NotFound(); 
+            }
 
+            if (book.AvailableCopies > 0)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (userId == null) 
+                {
+                    return Redirect("~/Identity/Account/Login");
+                }
+  
            
-            return View();
-        }
-        public async Task<IActionResult> Return()
-        {
+
+                book.AvailableCopies--;
+                _context.Update(book);
+                await _context.SaveChangesAsync();
 
 
-            return View();
+                return RedirectToAction("Index");
+            }
+
+            return BadRequest("No available copies");
+    
         }
+    
     }
 }

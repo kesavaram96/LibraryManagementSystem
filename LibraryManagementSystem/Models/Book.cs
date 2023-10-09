@@ -35,9 +35,6 @@ namespace LibraryManagementSystem.Models
         
         public int AvailableCopies { get; set; }
 
-
-
-
         public int AuthorID { get; set; }
 
         [ForeignKey("AuthorID")]
