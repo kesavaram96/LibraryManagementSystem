@@ -88,6 +88,8 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookID,BookName,BookGenre,BookISBN,BookCopies,AvailableCopies,AuthorID")] Book book)
         {
+            
+          
             if (id != book.BookID)
             {
                 return NotFound();

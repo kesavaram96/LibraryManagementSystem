@@ -1,0 +1,54 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.BooksInventory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>Time remain</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+
+                    
+                </td>
+               <td>
+                    @{
+                        var RemindDate = DateTime.Now - item.Date;
+                        if(RemindDate.Days<14)
+                        {
+                            int Remind = 14 - RemindDate.Days;
+                            <p>You have @Remind Days More</p>
+                        }
+                        else
+                        {
+                            <p>Due date is over</p>
+                        }
+                    }
+                    
+               </td>
+                <td>
+                    <a asp-action="SurrenderBook" asp-route-id="@item.Id">Surrender Book</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -4,6 +4,7 @@ using LibraryManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagementSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231009111405_InventoryUserKey")]
+    partial class InventoryUserKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,7 +158,7 @@ namespace LibraryManagementSystem.Data.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.BooksInventory", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Inventory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -180,7 +182,7 @@ namespace LibraryManagementSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BooksInventories");
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -331,7 +333,7 @@ namespace LibraryManagementSystem.Data.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("LibraryManagementSystem.Models.BooksInventory", b =>
+            modelBuilder.Entity("LibraryManagementSystem.Models.Inventory", b =>
                 {
                     b.HasOne("LibraryManagementSystem.Models.Book", "Book")
                         .WithMany()
