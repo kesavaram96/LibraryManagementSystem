@@ -42,7 +42,7 @@ namespace LibraryManagementSystem.Controllers
                     return Redirect("~/Identity/Account/Login");
                 }
 
-                var checkAvailabel=_context.BooksInventories.SingleOrDefaultAsync(b => b.BookId == id);
+                var checkAvailabel=_context.BooksInventories.FirstOrDefault(b => b.BookId == id);
                 if (checkAvailabel == null)
                 {
                     BooksInventory booksInventory = new BooksInventory
@@ -62,7 +62,8 @@ namespace LibraryManagementSystem.Controllers
 
                     return RedirectToAction("Index");
                 }
-                return Content("Book already taken");
+                else
+                    return Content("Book already taken");
 
             }
 
