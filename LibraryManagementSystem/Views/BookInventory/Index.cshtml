@@ -5,7 +5,12 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["error"]
+    </div>
+}
 <h4 class="text-center">Available Books</h4>
 
 <table class="table">

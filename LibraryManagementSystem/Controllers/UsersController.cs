@@ -1,9 +1,11 @@
 ﻿using LibraryManagementSystem.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementSystem.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;

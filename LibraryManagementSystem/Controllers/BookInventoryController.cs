@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using LibraryManagementSystem.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementSystem.Controllers
 {
-
+    [Authorize]
     public class BookInventoryController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -63,7 +64,7 @@ namespace LibraryManagementSystem.Controllers
                     return RedirectToAction("Index");
                 }
                 else
-                    ViewBag.Error = "Book already taken";
+                    TempData["error"] = "Book have already taken";
                     return RedirectToAction("Index");
 
             }
