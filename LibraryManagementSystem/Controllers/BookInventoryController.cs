@@ -63,7 +63,8 @@ namespace LibraryManagementSystem.Controllers
                     return RedirectToAction("Index");
                 }
                 else
-                    return Content("Book already taken");
+                    ViewBag.Error = "Book already taken";
+                    return RedirectToAction("Index");
 
             }
 
