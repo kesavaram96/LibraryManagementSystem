@@ -43,7 +43,7 @@ namespace LibraryManagementSystem.Controllers
                     return Redirect("~/Identity/Account/Login");
                 }
 
-                var checkAvailabel=_context.BooksInventories.FirstOrDefault(b => b.BookId == id);
+                var checkAvailabel=_context.BooksInventories.FirstOrDefault(b => b.BookId == id && b.UserId==userId);
                 if (checkAvailabel == null)
                 {
                     BooksInventory booksInventory = new BooksInventory
