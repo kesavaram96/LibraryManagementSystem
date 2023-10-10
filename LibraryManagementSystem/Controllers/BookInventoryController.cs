@@ -102,5 +102,12 @@ namespace LibraryManagementSystem.Controllers
 
             return RedirectToAction("Surrender");
         }
+        public async Task<IActionResult> Inventory()
+        {
+
+
+            var applicationDbContext = _context.BooksInventories.Include(b => b.Book).Include(b=>b.User);
+            return View(await applicationDbContext.ToListAsync());
+        }
     }
 }
